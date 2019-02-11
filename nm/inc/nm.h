@@ -17,6 +17,7 @@
 #include <fcntl.h>
 #include <stdbool.h>
 #include <sys/mman.h>
+#pragma GCC diagnostic ignored "-Wunused-parameter"
 
 typedef struct symList_s
 {
@@ -33,7 +34,7 @@ typedef struct elfData_s
     symList_t *symbolList;
     Elf64_Sym *symStart;
     Elf64_Sym *symStop;
-    char *symStrTab;
+    char **symStrTab;
 } elfData_t;
 
 //error.c

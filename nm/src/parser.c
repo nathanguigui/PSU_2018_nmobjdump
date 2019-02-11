@@ -14,11 +14,19 @@ bool check_magick(elfData_t *data)
     return (true);
 }
 
+void init_data(elfData_t *data)
+{
+    data->_ehdr = NULL;
+    data->_shdr = NULL;
+    data->symStrTab = NULL;
+}
+
 int elf_parser(char *path, elfData_t *data)
 {
     int fd;
     struct stat statbuf;
 
+    init_data(data);
     if ((fd = open(path, O_RDONLY)) == -1)
         quit("Cannot open file");
     if (fstat(fd, &statbuf) == -1)

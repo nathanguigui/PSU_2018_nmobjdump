@@ -10,13 +10,13 @@
 void getSymList(elfData_t *data)
 {
     Elf64_Sym *tmp = data->symStart;
-    // while (tmp < data->symStop) {
+    while (tmp < data->symStop) {
         // printf("%ld\n", tmp->st_value);
         tmp++;
-    // }
+    }
 }
 
-int core(elfData_t *data)
+bool core(elfData_t *data)
 {
     // printf("sh offset: %ld", data->_shdr->sh_offset);
     if (!check_overtake(data, (void*)data->_shdr))
@@ -24,6 +24,7 @@ int core(elfData_t *data)
     if (!check_each_section_header(data))
         quit("Cannot find symbol table");
     getSymList(data);
+    return (true);
 }
 
 int main(int argc, char const *argv[])
