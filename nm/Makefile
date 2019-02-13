@@ -5,18 +5,19 @@ CC	= gcc
 RM	= rm -f
 
 SRCS	= ./src/core.c \
-	  ./src/error.c \
-	  ./src/parser.c 
+	./src/error.c \
+	./src/parser.c \
+	./src/symbol.c
 
 OBJS	= $(SRCS:.c=.o)
 
 CFLAGS = -I ./inc/
-CFLAGS += -Wall -Wextra
+CFLAGS += -Wall -Wextra -g3
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	 $(CC) $(OBJS) -o $(NAME) $(LDFLAGS)
+	$(CC) $(OBJS) -o $(NAME) $(LDFLAGS)
 
 clean:
 	@$(RM) $(OBJS)

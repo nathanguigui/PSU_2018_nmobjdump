@@ -18,7 +18,6 @@ void init_data(elfData_t *data)
 {
     data->_ehdr = NULL;
     data->_shdr = NULL;
-    data->symStrTab = NULL;
 }
 
 int elf_parser(char *path, elfData_t *data)

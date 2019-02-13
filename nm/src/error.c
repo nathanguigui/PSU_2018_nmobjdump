@@ -22,22 +22,17 @@ bool check_overtake(elfData_t *data, void *ptr)
 
 bool check_each_section_header(elfData_t *data)
 {
-
-    for (int i = 0; i < data->_ehdr->e_shnum; i++) {
+    for (size_t i = 0; i < data->_ehdr->e_shnum; i++) {
         if (!check_overtake(data, (void*)&(data->_shdr[i])))
             quit("section header overtake");
         if (data->_shdr[i].sh_type == SHT_SYMTAB) {
             data->symStart = (void*)data->_ehdr + data->_shdr[i].sh_offset;
             data->symStop = (void*)data->_ehdr + data->_shdr[i].sh_offset
             + data->_shdr[i].sh_size;
+            data->strTab = (char*)data->_ehdr + data->_shdr[data->_shdr[i].sh_link].sh_offset;
             if (!check_overtake(data, data->symStart) ||
             !check_overtake(data, data->symStop))
                 quit("symbol table overtake");
-        }
-        if (data->_shdr[i].sh_type == SHT_STRTAB) {
-            data->symStrTab = (char*)data->_ehdr + data->_shdr[i].sh_offset;
-            if (!check_overtake(data, data->symStrTab))
-                quit("str symtab overtake");
         }
     } if ((void*)data->symStop < (void*)data->symStart)
         quit("sym stop before sym start");

@@ -17,13 +17,14 @@
 #include <fcntl.h>
 #include <stdbool.h>
 #include <sys/mman.h>
+#include <regex.h>
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 
 typedef struct symList_s
 {
     char *name;
     char letter;
-    void *ptr;
+    Elf64_Sym *ptr;
 } symList_t;
 
 typedef struct elfData_s
@@ -31,10 +32,10 @@ typedef struct elfData_s
     Elf64_Ehdr *_ehdr;
     Elf64_Shdr *_shdr;
     size_t _len;
-    symList_t *symbolList;
+    symList_t **symbolList;
     Elf64_Sym *symStart;
     Elf64_Sym *symStop;
-    char **symStrTab;
+    char *strTab;
 } elfData_t;
 
 //error.c
@@ -44,4 +45,7 @@ bool check_each_section_header(elfData_t*);
 
 //parser.c
 int elf_parser(char*, elfData_t*);
+
+//symbol.c
+void sortSym(elfData_t*);
 #endif /* !NM_H_ */
