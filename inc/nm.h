@@ -24,6 +24,7 @@ typedef struct symList_s
 {
     char *name;
     char letter;
+    int value;
     Elf64_Sym *ptr;
 } symList_t;
 
@@ -36,16 +37,21 @@ typedef struct elfData_s
     Elf64_Sym *symStart;
     Elf64_Sym *symStop;
     char *strTab;
+    char *arg;
 } elfData_t;
 
+void nm(int, const char **);
+bool core(elfData_t *);
+
+
 //error.c
-void quit(char*);
-bool check_overtake(elfData_t*, void*);
-bool check_each_section_header(elfData_t*);
+void quit(char *, elfData_t *);
+bool check_overtake(elfData_t *, void *);
+bool check_each_section_header(elfData_t *);
 
 //parser.c
-int elf_parser(char*, elfData_t*);
-
+int elf_parser(char *, elfData_t *, int);
+void init_data(elfData_t *);
 //symbol.c
-void sortSym(elfData_t*);
+void sortSym(elfData_t *);
 #endif /* !NM_H_ */

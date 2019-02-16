@@ -40,7 +40,10 @@ int cmpSym(symList_t *sym1, symList_t *sym2)
 {
     char *str1 = strEpur(strCaps(sym1->name));
     char *str2 = strEpur(strCaps(sym2->name));
-    return (strcmp(str1, str2));
+    if (strcmp(str1, str2) != 0)
+        return (strcmp(str1, str2));
+    else
+        return (strcmp(sym1->name, sym2->name));
 }
 
 bool unsorted(elfData_t *data)
