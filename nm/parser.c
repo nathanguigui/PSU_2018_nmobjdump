@@ -22,7 +22,6 @@ void init_data(elfData_t *data)
     data->symbolList = NULL;
     data->symStart = NULL;
     data->symStop = NULL;
-    data->arg = NULL;
 }
 
 int elf_parser(char *path, elfData_t *data, int fd)
