@@ -12,7 +12,7 @@ void fillSym(elfData_t *data, Elf64_Sym *symbol, int i)
     data->symbolList[i] = malloc(sizeof(symList_t));
     data->symbolList[i]->name = strdup(data->strTab + symbol->st_name);
     data->symbolList[i]->value = symbol->st_value;
-    data->symbolList[i]->letter = '?';
+    data->symbolList[i]->letter = setLetter(data, symbol);
     data->symbolList[i]->ptr = symbol;
 }
 

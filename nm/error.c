@@ -29,8 +29,12 @@ bool check_each_section_header(elfData_t *data)
             data->symStart = (void *)data->_ehdr + data->_shdr[i].sh_offset;
             data->symStop = (void *)data->_ehdr + data->_shdr[i].sh_offset
             + data->_shdr[i].sh_size;
+            if (data->_shdr[i].sh_link > data->_ehdr->e_shnum)
+                quit("File format not recognized", data);
             data->strTab = (char *)data->_ehdr
             + data->_shdr[data->_shdr[i].sh_link].sh_offset;
+            if (!check_overtake(data, data->strTab))
+                quit("File format not recognized", data);
             if (!check_overtake(data, data->symStart) ||
             !check_overtake(data, data->symStop))
                 quit("No symbols", data);

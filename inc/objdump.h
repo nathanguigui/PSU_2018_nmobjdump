@@ -19,12 +19,15 @@
 #include <sys/mman.h>
 #include <regex.h>
 
+#include "flags.h"
+
 typedef struct elfData_s
 {
     Elf64_Ehdr *_ehdr;
     Elf64_Shdr *_shdr;
     size_t _len;
     char *arg;
+    int flags;
 } elfData_t;
 
 
@@ -33,7 +36,7 @@ void quit(char *, elfData_t *);
 bool check_overtake(elfData_t *, void *);
 
 //parser.c
-int elf_parser(char *, elfData_t *, int);
+int elf_parser(elfData_t *, int);
 
 
 #endif /* !OBJDUMP_H_ */

@@ -10,11 +10,10 @@ NM_SRCS			=	./nm/core.c \
 					./nm/error.c \
 					./nm/parser.c \
 					./nm/symbol.c \
+					./nm/letter.c \
 					./nm/nm.c
 
-OBJDUMP_SRCS	=	./objdump/objdump.c \
-					./nm/parser.c \
-					./nm/error.c
+OBJDUMP_SRCS	=	./objdump/objdump.c
 
 NM_OBJS			=	$(NM_SRCS:.c=.o)
 

@@ -43,13 +43,13 @@ int cmpSym(symList_t *sym1, symList_t *sym2)
     if (strcmp(str1, str2) != 0)
         return (strcmp(str1, str2));
     else
-        return (strcmp(sym1->name, sym2->name));
+        return (-1);
 }
 
 bool unsorted(elfData_t *data)
 {
     for (int i = 0; data->symbolList[i + 1]; i++) {
-        if (cmpSym(data->symbolList[i], data->symbolList[i+1]) > 0)
+        if (cmpSym(data->symbolList[i], data->symbolList[i+1]) >= 0)
             return (true);
     }
     return (false);
@@ -60,7 +60,7 @@ void sortSym(elfData_t *data)
     symList_t *tmp = NULL;
     while (unsorted(data)) {
         for (int i = 0; data->symbolList[i + 1]; i++) {
-            if (cmpSym(data->symbolList[i], data->symbolList[i+1]) > 0) {
+            if (cmpSym(data->symbolList[i], data->symbolList[i+1]) >= 0) {
                 tmp = data->symbolList[i];
                 data->symbolList[i] = data->symbolList[i+1];
                 data->symbolList[i+1] = tmp;

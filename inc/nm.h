@@ -18,7 +18,16 @@
 #include <stdbool.h>
 #include <sys/mman.h>
 #include <regex.h>
-#pragma GCC diagnostic ignored "-Wunused-parameter"
+
+typedef struct SymTypTab_s
+{
+    int stt;
+    uint32_t sht;
+    uint32_t flag;
+    char type;
+} SymTypTab_t;
+
+extern SymTypTab_t SYM_TYP_TAB[];
 
 typedef struct symList_s
 {
@@ -54,4 +63,8 @@ int elf_parser(char *, elfData_t *, int);
 void init_data(elfData_t *);
 //symbol.c
 void sortSym(elfData_t *);
+//letter.c
+char setLetter(elfData_t *, Elf64_Sym *);
+
+
 #endif /* !NM_H_ */
