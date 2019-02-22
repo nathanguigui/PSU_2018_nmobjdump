@@ -34,7 +34,7 @@ void print_section_info(elfData_t *data, int ic, char *tmp)
     int off2 = 0;
 
     for (int i = 0; i < (int)data->_shdr[ic].sh_size; i += 16) {
-        printf(" %04x ", (int)(data->_shdr[ic].sh_offset) + i);
+        printf(" %04x ", (int)(data->_shdr[ic].sh_addr + i));
         for (off1 = 0; off1 < 16 && i + off1 < (int)data->_shdr[ic].sh_size; off1++) {
             printf("%02x", (unsigned char)tmp[i + off1]);
             ((off1 + 1) % 4 == 0) ? printf(" ") : 0;
