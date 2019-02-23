@@ -34,6 +34,7 @@ SymTypTab_t GTYP_TAB[] = {
     { STT_OBJECT, SHT_PROGBITS, 3, 'D' },
     { STT_OBJECT, SHT_PROGBITS, 2, 'R' },
     { STT_OBJECT, SHT_NOBITS, 3, 'B' },
+    { STT_NOTYPE, SHT_NOBITS, 3, 'B' },
     { STT_FUNC, SHT_NULL, 0, 'U' },
     { STT_FUNC, SHT_PROGBITS, 6, 'T' },
     { STT_LOOS, SHT_PROGBITS, 6, 'i' }
@@ -58,6 +59,7 @@ char setLetter(elfData_t *data, Elf64_Sym *sym)
             ELF64_ST_TYPE(sym->st_info) == STYP_TAB[i].stt)
                 return (STYP_TAB[i].type);
         }
+        return ('t');
     } else if (ELF64_ST_BIND(sym->st_info) == STB_GLOBAL) {
         for (int i = 0; i < 7; i++) {
             if (data->_shdr[sym->st_shndx].sh_type == GTYP_TAB[i].sht &&

@@ -1,3 +1,10 @@
+##
+## EPITECH PROJECT, 2019
+## PSU_2018_nmobjdump
+## File description:
+## Makefile
+##
+
 NM_NAME			=	my_nm
 
 OBJDUMP_NAME	=	my_objdump
@@ -13,7 +20,9 @@ NM_SRCS			=	./nm/core.c \
 					./nm/letter.c \
 					./nm/nm.c
 
-OBJDUMP_SRCS	=	./objdump/objdump.c
+OBJDUMP_SRCS	=	./objdump/objdump.c \
+					./objdump/parser.c \
+					./objdump/utils.c
 
 NM_OBJS			=	$(NM_SRCS:.c=.o)
 
@@ -46,7 +55,7 @@ $(OBJDUMP_NAME): $(OBJDUMP_OBJS)
 objdump_clean:
 	$(RM) $(OBJDUMP_OBJS)
 
-objdump_fclean:
+objdump_fclean: objdump_clean
 	$(RM) $(OBJDUMP_NAME)
 
 objdump_re: objdump_fclean objdump

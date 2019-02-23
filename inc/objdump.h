@@ -31,11 +31,16 @@ typedef struct elfData_s
 } elfData_t;
 
 
-//error.c
-void quit(char *, elfData_t *);
-bool check_overtake(elfData_t *, void *);
+//utils.c
+char *give_arch(elfData_t *, int);
+bool isPrint(char);
+void print_indent(int, int);
 
 //parser.c
+void quit(char *, elfData_t *);
+bool check_overtake(elfData_t *, void *);
+bool check_magick(elfData_t *);
+void init_data(elfData_t *);
 int elf_parser(elfData_t *, int);
 
 

@@ -59,7 +59,7 @@ bool check_overtake(elfData_t *, void *);
 bool check_each_section_header(elfData_t *);
 
 //parser.c
-int elf_parser(char *, elfData_t *, int);
+int elf_parser(elfData_t *, int);
 void init_data(elfData_t *);
 //symbol.c
 void sortSym(elfData_t *);

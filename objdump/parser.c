@@ -5,7 +5,20 @@
 ** parser
 */
 
-#include "nm.h"
+#include "objdump.h"
+
+void quit(char *error, elfData_t *data)
+{
+    fprintf(stderr, "objdump: %s: %s\n", data->arg, error);
+    exit(84);
+}
+
+bool check_overtake(elfData_t *data, void *ptr)
+{
+    if (ptr > (void *)(data->_ehdr) + data->_len)
+        return (false);
+    return (true);
+}
 
 bool check_magick(elfData_t *data)
 {
@@ -19,9 +32,7 @@ void init_data(elfData_t *data)
     data->_ehdr = NULL;
     data->_shdr = NULL;
     data->_len = 0;
-    data->symbolList = NULL;
-    data->symStart = NULL;
-    data->symStop = NULL;
+    data->flags = 0;
 }
 
 int elf_parser(elfData_t *data, int fd)
@@ -44,5 +55,6 @@ int elf_parser(elfData_t *data, int fd)
     data->_shdr = (Elf64_Shdr*) (((void *)data->_ehdr) + data->_ehdr->e_shoff);
     if (data->_len < data->_ehdr->e_shoff)
         quit("File format not recognized", data);
+    data->_ehdr->e_type == ET_EXEC ? data->flags |= EXEC_P : 0;
     return (true);
 }
