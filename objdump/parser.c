@@ -51,10 +51,10 @@ int elf_parser(elfData_t *data, int fd)
     if (!check_magick(data))
         quit("File format not recognized", data);
     if (data->_ehdr->e_shoff == 0)
-        quit("File format not recognized", data);
+        quit("File format not recognizede", data);
     data->_shdr = (Elf64_Shdr*) (((void *)data->_ehdr) + data->_ehdr->e_shoff);
     if (data->_len < data->_ehdr->e_shoff)
-        quit("File format not recognized", data);
+        quit("File format not recognizedf", data);
     data->_ehdr->e_type == ET_EXEC ? data->flags |= EXEC_P : 0;
     return (true);
 }

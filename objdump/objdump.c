@@ -16,14 +16,14 @@ void print_section_info(elfData_t *data, int ic, char *tmp)
     for (int i = 0; i < (int)data->_shdr[ic].sh_size; i += 16) {
         printf(" %04x ", (int)(data->_shdr[ic].sh_addr + i));
         for (off1 = 0;
-        off1 < 16 && i + off1 < (int)data->_shdr[ic].sh_size; off1 ++) {
+        off1 < 16 && i + off1 < (int)data->_shdr[ic].sh_size; off1++) {
             printf("%02x", (unsigned char)tmp[i + off1]);
             ((off1 + 1) % 4 == 0) ? printf(" ") : 0;
         }
         print_indent(off1, 1);
         printf(" ");
         for (off2 = 0; off2 < 16 && i + off2 < (int)data->_shdr[ic].sh_size;
-        off2 ++)
+        off2++)
             printf("%c", isPrint(tmp[i + off2]) ? tmp[i + off2] : '.');
         print_indent(off2, 2);
         printf("\n");
